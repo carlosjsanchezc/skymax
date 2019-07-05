@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'estadistica',
+        children: [
+          {
+            path: '',
+            loadChildren: '../estadistica/estadistica.module#EstadisticaPageModule'
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

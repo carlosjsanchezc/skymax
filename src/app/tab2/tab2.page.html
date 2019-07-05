@@ -1,9 +1,61 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab Two
+      Mi Cuenta
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+  <div text-center>
+    <img class="circleimg" src="{{profilepic}}" height="100px">
+  </div>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="4">
+        <b>Seguidores</b>
+      </ion-col>
+      <ion-col size="2">
+        <ion-badge color="primary">{{followers}}</ion-badge>
+      </ion-col>
+      <ion-col size="4">
+        <b>Siguiendo</b>
+      </ion-col>
+      <ion-col size="2">
+        <ion-badge color="primary">{{following}}</ion-badge>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-item lines="none">
+    <ion-label>Hacer Follows</ion-label>
+    <ion-toggle [(ngModel)]="lFollow"></ion-toggle>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>Velocidad</ion-label>
+    <ion-range min="15" max="60" color="secondary" step="5" snaps="true">
+      <ion-label slot="start">15</ion-label>
+      <ion-label slot="end">60</ion-label>
+    </ion-range>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>Hacer UnFollows</ion-label>
+    <ion-toggle></ion-toggle>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>Velocidad</ion-label>
+    <ion-range min="15" max="60" color="secondary" step="5" snaps="true">
+      <ion-label slot="start">15</ion-label>
+      <ion-label slot="end">60</ion-label>
+    </ion-range>
+  </ion-item>
+  <ion-item *ngFor="let person of objFollow;let j=index">
+    <ion-avatar>
+      <img [src]="person.profilepic"/>
+    </ion-avatar>
+    <p>{{person.username}}</p> 
+    <ion-spinner slot="end" name="bubbles" *ngIf="j==0"></ion-spinner>
+    <ion-icon *ngIf="j!=0" slot="end" name="hourglass"></ion-icon>
+  </ion-item>
+</ion-content>
