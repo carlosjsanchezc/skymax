@@ -60,7 +60,7 @@ export class Tab3Page {
     this.Core.user = this.myForm.controls['user'].value;
     this.Core.password=this.myForm.controls['password'].value;
     this.mensaje = "";
-    let loggeo = await this.Core.Login();
+    let loggeo = await this.Core.Login2();
     if (loggeo) {
       this.mensaje = "Verificado con exito";
       this.MyStorage.set('user',this.Core.user);

@@ -5,5 +5,23 @@
 </ion-header>
 
 <ion-content>
+  <ion-input type="text" [(ngModel)]="usernamef" placeholder="Username" value="marig291"></ion-input>
+  <ion-input type="text" [(ngModel)]="useridf" placeholder="Userid" value="8959023386"></ion-input>
+  <ion-label text-wrap>Login</ion-label>
+  <ion-input type="text" [(ngModel)]="username" placeholder="Username" ></ion-input>
+  <ion-input type="text" [(ngModel)]="password" placeholder="Password" ></ion-input>
+  <ion-button expand="block" (click)="Login()">
+    Login
+  </ion-button>
+  <ion-button expand="block" (click)="onClick()">
+    Follow
+  </ion-button>
+  <ion-button expand="block" (click)="onClick2()">
+    Get Cookies
+  </ion-button>
+
+  <ion-item>
+    <ion-label text-wrap> {{miscookies}}</ion-label>
+  </ion-item>
 
 </ion-content>
