@@ -23,39 +23,55 @@ export class EstadisticaPage implements OnInit {
   followers: number;
   following: number;
   logouturl: string = "https://instagram.com/accounts/logout/";
-  baseurl: string = "https://www.instagram.com";
+  baseurl: string = "https://www.instagram.com/";
   mid: string;
   profilepic: string;
   getPeopleURL: string = "http://tbitpro.com/skymax/apiskymax.php?opcion=follow&id_usuario=0";
-  loginurl: string = "https://www.instagram.com/accounts/login/ajax";
+  loginurl: string = "https://www.instagram.com/accounts/login/ajax/";
   followingsurl: string = "https://www.instagram.com/graphql/query/?query_id=17874545323001329&id={{accountId}}&first={{count}}&after={{after}}";
+  useragent: string = "Mozilla/5.0 (Linux; Android 8.1.0; motorola one Build/OPKS28.63-18-3; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/70.0.3538.80 Mobile Safari/537.36 Instagram 72.0.0.21.98 Android (27/8.1.0; 320dpi; 720x1362; motorola; motorola one; deen_sprout; qcom; pt_BR; 132081645)";
+  
   followurl: string = "https://www.instagram.com/web/friendships/{{accountId}}/follow/";
   constructor(private Core:CoreService,private webClient:HTTP,private http:HttpClient) { }
 
   ngOnInit() {
   }
   async Login(){
-    
-    let headers = {
-      'cookie': "ig_cb=1; csrftoken=" + this.csrf + "; mid=" + this.mid + ";",
-      'referer': this.baseurl + "/",
-      'x-csrftoken': this.csrf,
-      'X-CSRFToken': this.csrf,
+    let headers2 = { "user-agent":this.useragent
+      
 
     };
-    let params = {
-      'username': this.username,
-      'password': this.password
-    };
-    let h =this.webClient.getHeaders(this.loginurl);
-    console.log("getHeaders:", h);
-    console.log("Headers:", headers);
-    console.log("Params:", params);
-    let data2 = await this.webClient.post(this.loginurl, params, headers);
+    this.webClient.get(this.baseurl,{},headers2).then(datahome=>{
+     /* let cookies = this.webClient.getCookieString(this.baseurl);
+      console.log("Cookies:", cookies);
+      this.cookies = cookies;
+      this.miscookies=cookies;
+      this.mid = this.ExtraerCookie(cookies, "mid");
+      this.csrf=this.ExtraerCookie(cookies, "csrftoken");*/
+      let headers = {
+        'cookie': "ig_cb=1; csrftoken=" + this.csrf + "; mid=" + this.mid + ";",
+        'referer': this.baseurl + "/",
+        'x-csrftoken': this.csrf,
+        'X-CSRFToken': this.csrf,
+  
+      };
+      let params = {
+        'username': this.username,
+        'password': this.password
+      };
+      console.log("Headers:", headers);
+      console.log("Params:", params);
+      this.webClient.post(this.loginurl, params, headers).then(data=>{
+        console.log(data.data);
+  
+      }).catch(error=>{
+        console.log("Error=>",error);
+      });
+    });
 
 
-    //this.webClient.setCookie(this.baseurl,cookies);
-    console.log(data2);
+
+
   }
   
   onClick(){
